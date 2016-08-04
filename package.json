@@ -1,0 +1,7 @@
+{
+  "name": "cocos-package",
+  "version": "0.1.0",
+  "description": "Cocos Package",
+  "author": "Cocos Package",
+  "main": "main.js"
+}
