@@ -15,21 +15,21 @@ module.exports = {
 
     'editor:build-finished'(event, options) {
       try{ 
-        let tasks = options['sdkList'];
+        let tasks = options.sdkList;
 
         let dest = Path.join(options.dest, 'jsb-' + options.template );
         let opts = {
-          cwd: options.dest
+          cwd: dest
         };
 
         Async.eachSeries(tasks, function (task, done) {
-          if(task['checked']){
+          if(task.checked){
             let projectJsonPath = Path.join(dest, '.cocos-package.json');
             let json = JSON.parse(Fs.readFileSync(projectJsonPath));
-            let value = task['value'];
-            if (!json[value]){     
-              Editor.log('Import ' + task['text'] + ' to ' + dest);
-              let args = ['package', 'import', '-b', task['value'], '--runincocos'];  
+            let value = task.value;
+            if (options.platform == 'web-mobile' || !json[value]){     
+              Editor.log('Import ' + task.text + ' to ' + dest);
+              let args = ['package', 'import', '-b', value, '--runincocos', '-v'];  
               let child = Editor.NativeUtils.getCocosSpawnProcess(args, opts);
             
               child.stdout.on('data', (data) => {

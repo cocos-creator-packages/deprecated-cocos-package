@@ -1,6 +1,6 @@
 {
   "name": "cocos-package",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Cocos Package",
   "author": "Cocos Package",
   "main": "main.js"
