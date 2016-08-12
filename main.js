@@ -16,12 +16,16 @@ module.exports = {
     'editor:build-finished'(event, options) {
       try{ 
         let tasks = options.sdkList;
-
-        let dest = Path.join(options.dest, 'jsb-' + options.template );
+        let dest = '';
+        if(options.platform == 'web-mobile') {
+          dest = Path.join(options.dest, options.platform);
+        }else{
+          dest = Path.join(options.dest, 'jsb-' + options.template);
+        } 
         let opts = {
           cwd: dest
         };
-
+        
         Async.eachSeries(tasks, function (task, done) {
           if(task.checked){
             let projectJsonPath = Path.join(dest, '.cocos-package.json');
